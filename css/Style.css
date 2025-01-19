@@ -14,15 +14,7 @@
 body{
     background-color: rgb(0, 0, 0);
 }
-.logo{
-    
-}
-.logo span{ 
-    font-size: 26px;
-    font-family: "Poppins", serif;
-    font-weight: bold;
-    color: #8008fa;
-}
+
 
 
 .left {
@@ -38,11 +30,14 @@ body{
     /* margin-bottom: 17px; */
     
 }
+.home ul{
+    height: 15vh;
+}
 
 .home ul li {
     display: flex;
     gap: 15px;
-    width: 14px;
+    width: 30px;
     list-style: none;
     padding-top: 14px;
     font-weight: bold;
