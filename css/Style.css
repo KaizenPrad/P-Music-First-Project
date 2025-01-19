@@ -27,6 +27,7 @@ body{
     border-radius: 7px;
     position: relative;
     min-height: 81vh;
+    padding-bottom: 20px;
     /* margin-bottom: 17px; */
     
 }
@@ -79,6 +80,7 @@ body{
     justify-content: space-between;
     background-color: rgb(34 34 34);
     height: 72px;
+    border-radius: 10px;
 }
 .header > *{
     padding: 15px;
