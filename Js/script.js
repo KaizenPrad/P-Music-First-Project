@@ -35,15 +35,14 @@ async function getsongs(folder) {
   for (let index = 0; index < as.length; index++) {
     const element = as[index];
     if (element.href.endsWith(".mp3")) {
-      songs.push(element.href.split(`/${folder}/`)[1]
-      );
+      songs.push(element.href.split(`/${folder}/`)[1])
        // Extracting song path from URL
     }
   }
 
   //here Getting all Song Info In detail
   let songul = document.querySelector(".songList").getElementsByTagName("ul")[0]
-  songul.innerHTML =""
+  songul.innerHTML = ""
   for (const song of songs) {
     songul.innerHTML = songul.innerHTML + ` <li>
         <img class="invert" src="img/music.svg" alt="">
@@ -132,7 +131,7 @@ async function displayAlbums() {
 //Its a main Function in which we are adding even listening user Interaction
 
 async function main() {
-  await getsongs( "songs/ncs");
+  await getsongs("songs/ncs/");
   playmusic(songs[0], true);
 
   
