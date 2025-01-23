@@ -44,11 +44,10 @@ async function getsongs(folder) {
   let songul = document.querySelector(".songList").getElementsByTagName("ul")[0]
   songul.innerHTML = ""
   for (const song of songs) {
-    songul.innerHTML = songul.innerHTML + ` <li>
-        <img class="invert" src="img/music.svg" alt="">
-        <div class="info">
-          <div>${song.replaceAll("%20", " ")}</div> <!-- Song name -->
-          <div>Naman</div> <!-- Placeholder for the artist -->
+    songul.innerHTML = songul.innerHTML + ` <li><img class="invert" src="img/music.svg" alt="">
+    <div class="info">
+          <div> ${song.replaceAll("%20", " ")}</div> 
+          <div>Naman</div> 
         </div>
         <div class="playNow">
           <span>Play Now</span>
@@ -64,19 +63,19 @@ async function getsongs(folder) {
   Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e => {
     e.addEventListener("click", element => {
       playmusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
-    });
-  });
-  return songs;
+    })
+  })
+  return songs
 }
 
 //Now we are playing the default music here making track Func
 
-const playmusic = (track, pause= false) => {
+const playmusic = (track, pause = false) => {
   // let audio = new Audio("http://127.0.0.1:3000/Bigger%20Projects/Spotify/songs/" + track)
   currentsong.src = `/${currFolder}/` + track;
 
   if (!pause) {
-    currentsong.play();
+    currentsong.play()
     Play.src = "img/pause.svg";
   }
   document.querySelector(".songinfo").innerHTML = decodeURI(track);
@@ -192,18 +191,27 @@ async function main() {
     }
   });
 
-  document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e)=>{
+  // Add an event to volume
+  document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e) => {
+    console.log("Setting volume to", e.target.value, "/ 100")
+    currentsong.volume = parseInt(e.target.value) / 100
+    if (currentsong.volume >0){
+        document.querySelector(".volume>img").src = document.querySelector(".volume>img").src.replace("mute.svg", "volume.svg")
+    }
+})
 
-    currentsong.volume = parseInt(e.target.value)/100;
-    if(currentsong.volume >0){
-      document.querySelector(".volume>img").src = document.querySelector(".volume>img").src.replace("mute.svg", "volume.svg")
-
+// Add event listener to mute the track
+document.querySelector(".volume>img").addEventListener("click", e=>{ 
+    if(e.target.src.includes("volume.svg")){
+        e.target.src = e.target.src.replace("volume.svg", "mute.svg")
+        currentsong.volume = 0;
+        document.querySelector(".range").getElementsByTagName("input")[0].value = 0;
     }
     else{
-      e.target.src = e.target.src.replace("mute.svg", "volume.svg")
-      currentSong.volume = .10;
-      document.querySelector(".range").getElementsByTagName("input")[0].value = 10;
-  }
+        e.target.src = e.target.src.replace("mute.svg", "volume.svg")
+        currentsong.volume = .10;
+        document.querySelector(".range").getElementsByTagName("input")[0].value = 10;
+    }
 
   })
 
